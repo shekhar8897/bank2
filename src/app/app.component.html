@@ -1,0 +1,87 @@
+<app-navbar></app-navbar>
+<br>
+<br>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+        <form class="form">
+          <div class="row">
+              <div class="col-md-4">
+                  <div class="form-group">
+                    <select class="form-control" [(ngModel)]="default" name="listofcities" id="exampleSelect1" (change)="searchbankdata(search_data,default)">
+                        <option [ngValue]="value" disabled>choose cities</option>
+                          <option value="DELHI">DELHI</option>
+                          <option value="PATNA">PATNA</option>
+                          <option value="MUMBAI">MUMBAI</option>
+                          <option value="BANGALORE">BANGALORE</option>
+                          <option value="KOLKATA">KOLKATA</option> 
+                    </select>
+                  </div>
+              </div>
+              <div class="col-md-8">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Enter Bank name" [(ngModel)]="search_data" name="search"  id="search" 
+                    (keyup)="searchbankdata(search_data,default)">
+                    </mat-form-field>
+              </div>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
+<div class="container"  *ngIf="datafound" >
+  <div class="text">
+    <p class="text-uppercase" *ngIf="datafound" >The list of <b>{{search_data}}</b> in<b> {{default}}</b> are:-</p>
+    <span >
+       <p><b>ADD {{search_data}} to  FAV:-</b> &nbsp;&nbsp;<i class="far fa-bookmark" (click)="this.onClick()" [ngStyle]="{'cursor':'pointer'}" [ngClass]="{'active':isActive}"></i> </p>
+    </span>
+    
+  </div>
+</div>
+<div class="container">
+<mat-spinner *ngIf="isLoading" [ngStyle]="{'margin-left':'30%'}"
+        class="example-margin"
+        [color]="color">
+    </mat-spinner>
+</div>
+<div class="container "  *ngIf="!isLoading && datafound">
+  
+<div class='mat-elevation-z8'>
+    <mat-table [dataSource]="users" matSort>
+    <ng-container matColumnDef="BRANCH">
+    <th mat-header-cell *matHeaderCellDef  mat-sort-header><b> BRANCH</b> </th>
+    <td mat-cell *matCellDef="let element"> {{element.branch}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="ADDRESS">
+    <th mat-header-cell *matHeaderCellDef  mat-sort-header><b> ADDRESS</b> </th>
+    <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+    </ng-container>
+    <ng-container matColumnDef="STATE">
+    <th mat-header-cell *matHeaderCellDef  mat-sort-header> <b>STATE </b></th>
+    <td mat-cell *matCellDef="let element"> {{element.state}} </td>
+    </ng-container>
+    <ng-container matColumnDef="IFSC">
+    <th mat-header-cell *matHeaderCellDef  mat-sort-header> <b>IFSC </b></th>
+    <td mat-cell *matCellDef="let element"> {{element.ifsc}} </td>
+    </ng-container>
+    <ng-container matColumnDef="BANK_NAME">
+    <th mat-header-cell *matHeaderCellDef  mat-sort-header> <b>BANK_NAME </b></th>
+    <td mat-cell *matCellDef="let element"> {{element.bank_name}} </td>
+    </ng-container>
+    
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+  </mat-table>
+    <mat-paginator [length]="totalPosts" [pageSize]="postsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
+  ></mat-paginator>
+</div>
+</div>
+
+
+<br>
+<br>
+<router-outlet></router-outlet>

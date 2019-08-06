@@ -1,0 +1,33 @@
+th{
+    font-size:.8rem;
+    color:black;
+    
+
+}
+.hide{
+    display: none;
+}
+ tr mat-footer-row mat-footer-cell{
+     justify-content: center !important;
+
+ }
+ .example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+select{
+  margin-top:-10%;
+}
+.fa-bookmark{
+    color:black;
+}
+.fa-bookmark.active
+{
+    color:red;
+    font-size:2rem;
+}
